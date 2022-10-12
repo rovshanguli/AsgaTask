@@ -180,59 +180,48 @@ function App() {
 
 
   function sortTravels() {
-    // let descorasc = document.getElementById("descorasc").value;
-    // let sortby = document.getElementById("sortby").value;
+    let descorasc = document.getElementById("descorasc").value;
+    let sortby = document.getElementById("sortby").value;
 
 
-    // if (descorasc === "asc") {
-    //   if (sortby === "cash") {
-    //     let sorted = travel.sort((a, b) => a.cash - b.cash)
-    //     setTravel(sorted);
-    //   }
-    //   else if (sortby === "day") {
-    //     setTravel(travel.sort((a, b) => new Date(a.startTime) - new Date(b.startTime)));
-    //   }
-    // }
+    if (descorasc === "asc") {
+      if (sortby === "cash") {
+        let sorted = travel.sort((a, b) => a.cash - b.cash)
+        setTravel(sorted);
+      }
+      else if (sortby === "day") {
+        setTravel(travel.sort((a, b) => new Date(a.startTime) - new Date(b.startTime)));
+      }
+    }
 
-    // else if (descorasc === "desc") {
-    //   if (sortby === "cash") {
-    //     setTravel(travel.sort((a, b) => b.cash - a.cash));
-    //   }
-    //   else if (sortby === "day") {
-    //     setTravel(travel.sort((a, b) => new Date(b.startTime) - new Date(a.startTime)));
-    //   }
-    // }
+    else if (descorasc === "desc") {
+      if (sortby === "cash") {
+        setTravel(travel.sort((a, b) => b.cash - a.cash));
+      }
+      else if (sortby === "day") {
+        setTravel(travel.sort((a, b) => new Date(b.startTime) - new Date(a.startTime)));
+      }
+    }
 
-    // let total = 0;
-    // travel.forEach(element => {
-    //   total += element.cash;
-    // });
-    // setTotalCash(total);
+  
 
-    // //calculate total day
-    // let totald = 0;
-    // travel.forEach(element => {
-    //   totald += new Date(element.endTime) - new Date(element.startTime);
-    // });
-    // setTotalDay(Math.ceil(totald / (1000 * 3600 * 24)));
+    
 
-    // //append to table
-    // let table = document.getElementById("table");
-    // table.innerHTML = "";
-    // let index=1;
-    // travel.forEach(item => {
-    //   table.innerHTML += `<tr>
-    //   <td>${index}</td>
-    //   <td>${item.countryName}</td>
-    //   <td>${item.cityName}</td>
-    //   <td>${item.cash}</td>
-    //   <td>${item.startTime}</td>
-    //   <td>${item.endTime}</td>
-    //   <td><button class="btn btn-danger" onClick="deleteOrder(${item.id})">Delete</button></td>
-    //   <td><button class="btn btn-warning" onClick=${() => putOrder()})">Edit</button></td>
-    // </tr>`
-    //   index++;
-    // });
+    //append to table
+    let table = document.getElementById("table");
+    table.innerHTML = "";
+    let index=1;
+    travel.forEach(item => {
+      table.innerHTML += `<th scope="row">${index + 1}</th>
+      <td>${item?.city?.country.name}</td>
+      <td>${item?.city?.name}</td>
+      <td>${item?.startTime}</td>
+      <td>${item?.endTime}</td>
+      <td>${item?.cash}</td>`
+      index++;
+    });
+
+
   }
 
 

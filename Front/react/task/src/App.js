@@ -23,7 +23,7 @@ function App() {
         setCountry(res.data);
       })
       .catch(err => {
-        console.log(err);
+       
       })
 
     axios.get("https://localhost:7244/api/Order/GetAllOrder")
@@ -31,17 +31,20 @@ function App() {
         setTravel(res.data);
         let totalc = 0;
         let totald = 0;
+        let totalcountry = [];
         res.data.forEach(element => {
           totalc += element.cash;
           totald += new Date(element.endTime) - new Date(element.startTime);
+          let index = totalcountry.findIndex(x => x === element.city.country.id);
+          if (index === -1) {
+            totalcountry.push(element.city.country.id)
+          }
         });
         setTotalCash(totalc);
         setTotalDay(Math.ceil(totald / (1000 * 3600 * 24)));
-
-
+        setTotalCountry(totalcountry.length);
       })
       .catch(err => {
-        console.log(err);
       })
 
   }, []);
@@ -54,7 +57,6 @@ function App() {
         setCity(res.data);
       })
       .catch(err => {
-        console.log(err);
       })
   }
 
@@ -82,16 +84,21 @@ function App() {
                 setTravel(res.data);
                 let totalc = 0;
                 let totald = 0;
+                let totalcountry = [];
                 res.data.forEach(element => {
                   totalc += element.cash;
                   totald += new Date(element.endTime) - new Date(element.startTime);
+                  let index = totalcountry.findIndex(x => x === element.city.country.id);
+                  if (index === -1) {
+                    totalcountry.push(element.city.country.id)
+                  }
                 });
                 setTotalCash(totalc);
                 setTotalDay(Math.ceil(totald / (1000 * 3600 * 24)));
                 setOrderId(null);
+                setTotalCountry(totalcountry.length);
               })
               .catch(err => {
-                console.log(err);
               })
           }
         })
@@ -119,16 +126,21 @@ function App() {
                 setTravel(res.data);
                 let totalc = 0;
                 let totald = 0;
+                let totalcountry = [];
                 res.data.forEach(element => {
                   totalc += element.cash;
                   totald += new Date(element.endTime) - new Date(element.startTime);
+                  let index = totalcountry.findIndex(x => x === element.city.country.id);
+                  if (index === -1) {
+                    totalcountry.push(element.city.country.id)
+                  }
                 });
                 setTotalCash(totalc);
                 setTotalDay(Math.ceil(totald / (1000 * 3600 * 24)));
                 setOrderId(null);
+                setTotalCountry(totalcountry.length);
               })
               .catch(err => {
-                console.log(err);
               })
           }
         })
@@ -152,12 +164,10 @@ function App() {
     console.log(id);
     axios.delete('https://localhost:7244/api/Order/DeleteOrder/' + id)
       .then(res => {
-        console.log(res);
         window.location.reload();
       }
       )
       .catch(err => {
-        console.log(err);
       }
       )
   }
@@ -174,7 +184,6 @@ function App() {
         setTotalCash(total);
       })
       .catch(err => {
-        console.log(err);
       })
   }
 
